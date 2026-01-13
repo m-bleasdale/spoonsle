@@ -1,4 +1,5 @@
 import Game from "@/components/game";
+import crypto from "crypto";
 
 const data = 
 [
@@ -174,7 +175,13 @@ const data =
 
 export default function Home() {
 
-    const selectedIndex = Math.floor(Math.random() * (data.length));
+    function getRandomIndex(length : number) {
+      const randomBytes = crypto.randomBytes(4);
+      const randomInt = randomBytes.readUInt32BE(0);
+      return randomInt % length;
+    }
+
+    const selectedIndex = getRandomIndex(data.length);
 
   return (
     <div className="flex min-h-screen justify-center bg-zinc-50 font-sans dark:bg-black">
