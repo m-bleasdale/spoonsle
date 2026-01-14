@@ -32,6 +32,9 @@ export default function Game ({data, selectedIndex} : {data : Pub[], selectedInd
     const imageOrder = shuffleArray(indexes);
     const images = data[selectedIndex].images;
 
+    console.log(selectedIndex);
+    console.log(imageOrder);
+
     const [currentImage, setCurrentImage] = useState(0);
     const next = () =>
         setCurrentImage((prev) => (prev < mistakes.length ? prev + 1 : prev));
