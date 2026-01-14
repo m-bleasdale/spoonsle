@@ -59,8 +59,8 @@ export default function Game ({data, selectedIndex} : {data : Pub[], selectedInd
     }
 
     return (
-        <div className="w-150 flex flex-col items-center gap-5">
-            <div className="flex gap-2 flex-col w-150 h-120 rounded-md">
+        <div className="w-80 md:w-150 flex flex-col items-center gap-5">
+            <div className="flex gap-2 flex-col w-80 md:w-150 h-120 rounded-md">
                 <img
                     src={images[imageOrder[currentImage]]}
                     alt="Image to guess"
@@ -91,7 +91,7 @@ export default function Game ({data, selectedIndex} : {data : Pub[], selectedInd
             {mistakes.map((mistake, i) => (
                 <div 
                     key={i}
-                    className="rounded-md flex flex-row w-110 h-15 px-5 bg-red-700 text-white font-medium items-center justify-between text-lg"
+                    className="rounded-md flex flex-row w-80 md:w-110 h-15 px-5 bg-red-700 text-white font-medium items-center justify-between text-lg"
                 >
                     {mistake}
                     <X size={32} strokeWidth={4} color="#ffffff"/>
@@ -100,7 +100,7 @@ export default function Game ({data, selectedIndex} : {data : Pub[], selectedInd
 
             {(gameOver && win) &&
                 <div 
-                    className="rounded-md flex flex-row w-110 h-15 px-5 bg-green-700 text-white font-medium items-center justify-between text-lg"
+                    className="rounded-md flex flex-row w-80 md:w-110 h-15 px-5 bg-green-700 text-white font-medium items-center justify-between text-lg"
                 >
                     {`${data[selectedIndex].name}, ${data[selectedIndex].area}, ${data[selectedIndex].city}`}
                     <Check size={32} strokeWidth={4} color="#ffffff"/>
@@ -109,7 +109,7 @@ export default function Game ({data, selectedIndex} : {data : Pub[], selectedInd
 
             {(gameOver && !win) &&
                 <div 
-                    className="border-2 rounded-md flex bg-white flex-row w-110 h-15 px-5 items-center justify-between text-lg"
+                    className="border-2 rounded-md flex bg-white flex-row w-80 md:w-110 h-15 px-5 items-center justify-between text-lg"
                 >
                     <p>It was <span className="font-bold">{`${data[selectedIndex].name}, ${data[selectedIndex].area}, ${data[selectedIndex].city}`}</span></p>
                 </div>
@@ -132,7 +132,7 @@ export default function Game ({data, selectedIndex} : {data : Pub[], selectedInd
             [...Array(5 - 1 - mistakes.length)].map((_, i) => (
                 <div
                     key={i}
-                    className="border-2 rounded-md flex flex-row w-110 h-15 bg-white text-white font-medium items-center justify-between text-lg"
+                    className="border-2 rounded-md flex flex-row w-80 md:w-110 h-15 bg-white text-white font-medium items-center justify-between text-lg"
                 />
             ))}
 

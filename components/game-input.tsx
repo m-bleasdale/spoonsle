@@ -36,7 +36,7 @@ export function GameInput({pubs, onGuess} : {pubs: Pub[], onGuess : any}) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-110 h-14 justify-between hover:cursor-pointer text-md"
+          className="w-80 md:w-110 h-14 justify-between hover:cursor-pointer text-md"
         >
           {value
             ? options.find((options) => options.value === value)?.label
@@ -44,7 +44,7 @@ export function GameInput({pubs, onGuess} : {pubs: Pub[], onGuess : any}) {
           <Search className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-110 p-0">
+      <PopoverContent className="w-80 md:w-110 p-0">
         <Command>
           <CommandInput placeholder="Take a guess..." className="h-9 text-md" />
           <CommandList>

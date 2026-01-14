@@ -1,5 +1,4 @@
 import Game from "@/components/game";
-import crypto from "crypto";
 
 const data = 
 [
@@ -173,15 +172,19 @@ const data =
   }
 ];
 
-export default function Home() {
+async function getRandomIndex(length : number) {
+  const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
 
-    function getRandomIndex(length : number) {
-      const randomBytes = crypto.randomBytes(4);
-      const randomInt = randomBytes.readUInt32BE(0);
-      return randomInt % length;
-    }
+  const res = await fetch(`${baseUrl}/api/random?length=${length}`, { cache: "no-store" });
+  const data = await res.json();
+  return data.index as number;
+}
 
-    const selectedIndex = getRandomIndex(data.length);
+export default async function Home() {
+
+  const selectedIndex = await getRandomIndex(data.length);
 
   return (
     <div className="flex min-h-screen justify-center bg-zinc-50 font-sans dark:bg-black">
