@@ -5,33 +5,13 @@ import { GameInput } from "./game-input";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "./ui/button";
-import crypto from "crypto";
 
-function getRandomIndex(length : number) {
-    const randomBytes = crypto.randomBytes(4);
-    const randomInt = randomBytes.readUInt32BE(0);
-    return randomInt % length;
-}
-
-function shuffleArray<T>(arr: T[]): T[] {
-    const array = [...arr]; // copy so we don't mutate original
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = getRandomIndex(i + 1); // random index from 0 to i
-        [array[i], array[j]] = [array[j], array[i]]; // swap
-    }
-    return array;
-}
-
-export default function Game ({data} : {data : Pub[]}) {
+export default function Game ({data, selectedIndex, imageOrder} : {data : Pub[], selectedIndex : number, imageOrder: number[]}) {
     const [mistakes, setMistakes] = useState<string[]>([]);
     const [gameOver, setGameOver] = useState(false);
     const [win, setWin] = useState (false);
     const [pubs, setPubs] = useState<Pub[]>(data);
 
-    const selectedIndex = getRandomIndex(data.length);
-
-    const indexes = [0,1,2,3,4];
-    const imageOrder = shuffleArray(indexes);
     const images = data[selectedIndex].images;
 
     const [currentImage, setCurrentImage] = useState(0);

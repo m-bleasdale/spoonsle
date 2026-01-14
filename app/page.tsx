@@ -1,4 +1,8 @@
+"use client";
+
 import Game from "@/components/game";
+import crypto from "crypto";
+import { useEffect, useState } from "react";
 
 const data = 
 [
@@ -172,12 +176,39 @@ const data =
   }
 ];
 
+function getRandomIndex(length : number) {
+    const randomBytes = crypto.randomBytes(4);
+    const randomInt = randomBytes.readUInt32BE(0);
+    return randomInt % length;
+}
+
+function shuffleArray<T>(arr: T[]): T[] {
+    const array = [...arr]; // copy so we don't mutate original
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = getRandomIndex(i + 1); // random index from 0 to i
+        [array[i], array[j]] = [array[j], array[i]]; // swap
+    }
+    return array;
+}
+
 export default function Home() {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [imageOrder, setImageOrder] = useState<number[]>([]);
+
+  useEffect(() => {
+    const index = getRandomIndex(data.length)
+    setSelectedIndex(index);
+
+    const order = shuffleArray([0,1,2,3,4]);
+    setImageOrder(order);
+  }, []);
+
+  if (selectedIndex === null) return null;
 
   return (
     <div className="flex min-h-screen justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="w-full flex justify-center mt-10 mb-20">
-      <Game data={data} />  
+      <Game data={data} selectedIndex={selectedIndex} imageOrder={imageOrder}/>  
       </main>
     </div>
   );
