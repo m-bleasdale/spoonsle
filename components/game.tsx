@@ -22,18 +22,17 @@ function shuffleArray<T>(arr: T[]): T[] {
     return array;
 }
 
-export default function Game ({data, selectedIndex} : {data : Pub[], selectedIndex: any}) {
+export default function Game ({data} : {data : Pub[]}) {
     const [mistakes, setMistakes] = useState<string[]>([]);
     const [gameOver, setGameOver] = useState(false);
     const [win, setWin] = useState (false);
     const [pubs, setPubs] = useState<Pub[]>(data);
 
+    const selectedIndex = getRandomIndex(data.length);
+
     const indexes = [0,1,2,3,4];
     const imageOrder = shuffleArray(indexes);
     const images = data[selectedIndex].images;
-
-    console.log(selectedIndex);
-    console.log(imageOrder);
 
     const [currentImage, setCurrentImage] = useState(0);
     const next = () =>

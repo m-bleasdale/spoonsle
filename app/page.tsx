@@ -1,5 +1,4 @@
 import Game from "@/components/game";
-import crypto from "crypto";
 
 const data = 
 [
@@ -173,21 +172,12 @@ const data =
   }
 ];
 
-function getRandomIndex(length : number) {
-    const randomBytes = crypto.randomBytes(4);
-    const randomInt = randomBytes.readUInt32BE(0);
-    return randomInt % length;
-}
-
-
-export default async function Home() {
-
-  const selectedIndex = await getRandomIndex(data.length);
+export default function Home() {
 
   return (
     <div className="flex min-h-screen justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="w-full flex justify-center mt-10 mb-20">
-      <Game data={data} selectedIndex={selectedIndex}/>  
+      <Game data={data} />  
       </main>
     </div>
   );
